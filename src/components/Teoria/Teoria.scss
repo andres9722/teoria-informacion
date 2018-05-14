@@ -1,0 +1,116 @@
+@import '../../index.scss';
+
+.teoria {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  &__text {
+    margin-top: 16px;
+    padding: 8px;
+    border: 3px solid color(border-color);
+    background: color(white);
+
+    &:nth-child(1) {
+      margin-top: 46px;
+    }
+  }
+
+  &__title {
+    padding: 8px 0;
+  }
+
+  &__subtitle {
+    color: color(principal-color);
+    margin-top: 16px;
+    padding: 8px;
+    border-bottom: 3px solid rgba(color(principal-color), .1);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__info {
+    margin-top: 16px;
+    padding: 8px;
+    border-bottom: 3px solid color(border-color);
+  }
+
+  &__input {
+    border: 3px solid color(border-color);
+    padding: 8px;
+    border-radius: 5px;
+    font-family: $font-title;
+    margin-bottom: 16px;
+  }
+
+}
+
+.button__reset {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  padding: 8px;
+  border: 2px solid color(border-color);
+  border-radius: 5px;
+  color: color(white);
+  background: color(principal-color);
+  text-transform: uppercase;
+  font-family: $font-title;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.upload__label {
+  padding: 8px;
+  font-family: $font-title;
+  text-transform: uppercase;
+  background: darken(color(border-color), 10);
+  border: 2px solid color(border-color);
+  color: color(font-color);
+  cursor: pointer;
+  transition: background .3s ease;
+  border-radius: 5px;
+
+  &:hover {
+    background: darken(color(border-color), 20);
+  }
+}
+
+.upload__input {
+  display: none;
+}
+
+.table {
+  width: 100%;
+  border: 3px solid color(border-color);
+  margin-top: 16px;
+  border-collapse: collapse;
+  
+  th {
+    padding: 4px;
+    border-right: 3px solid color(border-color);
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  &__row {
+    &:nth-child(even) {
+      background: rgba(color(principal-color), 0.025);
+    }
+  }
+
+  &__item {
+    margin-top: 16px;
+    padding: 8px;
+    border: 3px solid color(border-color);
+  }
+
+  td {
+    text-align: center;
+    padding: 4px;
+  }
+}

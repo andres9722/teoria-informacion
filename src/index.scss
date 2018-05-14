@@ -1,0 +1,39 @@
+@import './shared/typography.scss';
+@import './shared/variables.scss';
+@import './shared/base.scss';
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  box-shadow: 0 3px color(border-color);
+  margin-bottom: 16px;
+  position: relative;
+  
+  &__title {
+    text-transform: uppercase;
+    font-family: $font-text;
+  }
+}
+
+.group {
+  position: absolute;
+  top: 15px;
+  left: 1rem;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  p {
+    font-size: 12px;
+  }
+}

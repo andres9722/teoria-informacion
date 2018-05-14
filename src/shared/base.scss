@@ -1,0 +1,57 @@
+*,
+*::before,
+*:after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+body {
+  margin : 0;
+  line-height: 1.6;
+  font-family : $font-text;
+  background-color: color(body-bg);
+  color: color(font-color);
+  padding-bottom: 32px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-title;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}
+
+input, textarea {
+  display: block;
+  width: 100%;
+  font-family: $font-text;
+}
+
+.l-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+

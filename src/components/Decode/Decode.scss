@@ -1,0 +1,36 @@
+@import '../../index.scss';
+
+.decode {
+  border: 3px solid color(border-color);
+  padding: 16px;
+  .form {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 8px;
+
+    &__input {
+      border: 3px solid color(border-color);
+      padding: 8px;
+      border-radius: 5px;
+      font-family: $font-title;
+      margin-bottom: 4px;
+    }
+
+    &__button {
+      border: 3px solid color(border-color);
+      background: color(principal-color);
+      padding: 8px;
+      color: color(white);
+      border-radius: 5px;
+      font-family: $font-title;
+      cursor: pointer;
+      margin-bottom: 16px;
+      margin-top: 16px;
+
+      &--delete {
+        background: color(secondary-color);
+      }
+    }
+  }
+}
