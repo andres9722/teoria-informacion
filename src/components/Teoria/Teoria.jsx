@@ -29,6 +29,7 @@ export default class Teoria extends Component {
     let numberSpaces = text.split(' ').length - 1
 
     let letters = text.split('')
+
     let letterFreq = {}
 
     letters.forEach(letter => {
@@ -83,10 +84,6 @@ export default class Teoria extends Component {
     let huffmanTree = buildHuffmanTree(huffmanPriorityQueue)
     let huffmanEncodingTable = new HuffmanEncodingTable()
     huffmanEncodingTable.generateEncodingTableRecursively(huffmanTree)
-
-    this.setState({
-      huffman: huffmanEncodingTable
-    })
 
     function populateCharacterFrequencyHash (text) {
       let characterFrequency = {}
@@ -235,93 +232,11 @@ export default class Teoria extends Component {
         let newEncodingTableEntry = new Array(newCharacter, newFrequency, newBinary)
         this.table.push(newEncodingTableEntry)
       }
-
-      this.toString = function () {
-        let textOutput = ''
-        for (let i in this.table) {
-          let tableRow = this.table[i]
-          textOutput += tableRow.join(' ') + '\n'
-        }
-        textOutput = textOutput.substring(0, textOutput.length - 1)
-        return textOutput
-      }
-
-      this.setCharacterEncodingHash = function () {
-        this.characterEncodingHash = {}
-        let tableCharacterIndex = 0
-        let tableEncodingIndex = 2
-        for (let i in this.table) {
-          let tableRow = this.table[ i ]
-          this.characterEncodingHash[tableRow[tableCharacterIndex]] = tableRow[tableEncodingIndex]
-        }
-      }
-
-      this.encodeText = function (textToEncode) {
-        let encodedText = ''
-        for (let i = 0; i < textToEncode.length; i++) {
-          encodedText += this.characterEncodingHash[textToEncode.charAt(i)]
-        }
-        return encodedText
-      }
     }
 
-    function decodeInput () {
-      let encodedTableInput = document.getElementById('encoded-table').value.split('\n')
-      encodedTableInput = mergeLiteralNewlineRows(encodedTableInput)
-      let huffmanEncodingTable = populateHuffmanEncodingTable(encodedTableInput)
-      let decodedOutput = generateDecodedOutput(huffmanEncodingTable)
-      console.log('decoded:', decodedOutput)
-    }
-
-    function mergeLiteralNewlineRows (encodedTableInput) {
-      let newEncodedTableInput = []
-      for (let i = 0; i < encodedTableInput.length; i++) {
-        let tableRow = encodedTableInput[ i ]
-        if (tableRow === '' && encodedTableInput[i + 1].match(/^ /)) {
-          newEncodedTableInput.push('\n' + encodedTableInput[i + 1])
-          i++
-        } else {
-          newEncodedTableInput.push(tableRow)
-        }
-      }
-      return encodedTableInput
-    }
-
-    function populateHuffmanEncodingTable (encodedTableInput) {
-      let huffmanEncodingTable = new HuffmanEncodingTable()
-      for (let i in encodedTableInput) {
-        let tableRow = encodedTableInput[i]
-        if (tableRow === '') {
-          continue
-        } else if (tableRow === ' ') {
-          huffmanEncodingTable.add_table_entry('\n', null, tableRow.match(/\d+$/)[0])
-        } else {
-          huffmanEncodingTable.add_table_entry(tableRow.charAt(0), null, tableRow.match(/\d+$/)[0])
-        }
-      };
-      return huffmanEncodingTable
-    }
-
-    function generateDecodedOutput (huffmanEncodingTable) {
-      let decodedOutput = ''
-      let encodedOutput = document.getElementById('encoded-output').value
-      let encodingTableCharacterIndex = 0
-      let encodingTableBinaryIndex = 2
-      while (encodedOutput.length > 0) {
-        for (let i = 0; i < encodedOutput.length; i++) {
-          let currentBinary = encodedOutput.substring(0, i + 1)
-          for (let tableRowIndex = 0; tableRowIndex < huffmanEncodingTable.table.length; tableRowIndex++) {
-            if (currentBinary === huffmanEncodingTable.table[tableRowIndex][encodingTableBinaryIndex]) {
-              decodedOutput += huffmanEncodingTable.table[tableRowIndex][encodingTableCharacterIndex]
-              encodedOutput = encodedOutput.substring(i + 1, encodedOutput.length)
-              i = -1
-              break
-            }
-          }
-        }
-      }
-      return decodedOutput
-    }
+    this.setState({
+      huffman: huffmanEncodingTable
+    })
   }
 
   handleOnReset () {
@@ -356,7 +271,7 @@ export default class Teoria extends Component {
 
   render () {
     return (
-      <div className='teoria__container l-container'>
+      <section className='teoria__container l-container'>
         <div>
           <h3 className='teoria__title'>Pon tu texto</h3>
           <textarea autoFocus id='teoria__input' rows='5' className='teoria__input' type='text' placeholder='Texto'
@@ -397,10 +312,11 @@ export default class Teoria extends Component {
           <p className='teoria__subtitle'> <b>Decodificador:</b></p>
           <Decode />
         </div>
-        <div>
+        <div className='teoria__section'>
           <p className='teoria__text'> <b>Texto:</b> {this.state.text} </p>
           <p className='teoria__text'> <b>Número de caracteres:</b> {this.state.numberLetters}</p>
           <p className='teoria__text'> <b>Número de espacios:</b> {this.state.numberSpaces}</p>
+          <p className='teoria__text'> <b>Total:</b> {this.state.numberSpaces + this.state.numberLetters}</p>
           <p className='teoria__text'> <b>Entropía:</b> {this.state.entropy.toFixed(5)} bits por simbolo</p>
 
           <table className='table'>
@@ -427,7 +343,7 @@ export default class Teoria extends Component {
           </table>
         </div>
         <button className='button__reset' onClick={this.handleOnReset}>Reset</button>
-      </div>
+      </section>
     )
   }
 }

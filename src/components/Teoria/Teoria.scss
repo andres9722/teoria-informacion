@@ -1,10 +1,21 @@
 @import '../../index.scss';
 
+html {
+  padding: 8px;
+
+  @include from($large) {
+    padding: 0;
+  }
+}
+
 .teoria {
+  display: flex;
   &__container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    @include from($large) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
   }
 
   &__text {

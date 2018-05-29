@@ -9,7 +9,8 @@ export default class Decode extends Component {
     this.state = {
       counter: [],
       simbols: [],
-      text: []
+      text: [],
+      code: []
     }
 
     this.handleOnAddSimbol = this.handleOnAddSimbol.bind(this)
@@ -23,7 +24,8 @@ export default class Decode extends Component {
     this.setState({
       counter: [],
       simbols: [],
-      text: []
+      text: [],
+      code: []
     })
 
     this.textArea.value = ''
@@ -40,9 +42,9 @@ export default class Decode extends Component {
 
   handleOnRemoveSimbol () {
     let prevState = this.state.counter
-    console.log(prevState)
     prevState.pop()
     prevState = this.state.counter
+
     this.setState({
       counter: prevState
     })
@@ -76,21 +78,18 @@ export default class Decode extends Component {
   handleOnChangeCode (e) {
     let prevState = this.state.simbols
     let value = e.target.value
-    console.log(value)
 
-    prevState.forEach(simbol => {
-      console.log(simbol)
-      if (simbol.code === value && simbol.code.length === value.length) {
-        this.setState({
-          text: this.state.text.concat([simbol.character])
-        })
-      }
-    })
+    let arr = prevState.find(e => e.code === value)
 
-    if (this.textArea.value === '') {
+    if (arr !== undefined) {
       this.setState({
-        text: ''
+        text: this.state.text.concat([arr.character]),
+        code: this.state.code.concat([arr.code])
       })
+
+      setTimeout(() => {
+        this.textArea.value = ''
+      }, 100)
     }
   }
 
@@ -109,6 +108,8 @@ export default class Decode extends Component {
         <button className='form__button' onClick={this.handleOnAddSimbol}>Agregar</button>
         <button className='form__button form__button--delete' onClick={this.handleOnRemoveSimbol}>Eliminar</button>
         <textarea className='form__input' cols='2' rows='2' placeholder='Código' onChange={this.handleOnChangeCode} ref={el => { this.textArea = el }} />
+        <p className='decode__result'> <b>Código:</b> {this.state.code} </p>
+        <br />
         <p className='decode__result'> <b>Resultado:</b> {this.state.text} </p>
         <button className='form__button' onClick={this.handleOnReset}>Reset</button>
       </div>

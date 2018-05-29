@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Teoria from './components/Teoria/Teoria.jsx'
 import './index.scss'
+import { pwa, isOnLine } from './registerServiceWorker'
 
 export default class App extends Component {
   constructor (props) {
@@ -16,7 +17,9 @@ export default class App extends Component {
       this.setState({
         loading: false
       })
-    }, 1000)
+      pwa()
+      isOnLine()
+    }, 1500)
   }
 
   componentWillUnmount () {
@@ -25,10 +28,23 @@ export default class App extends Component {
   render () {
     return this.state.loading === true
     ? (<div className='loader'>
-      <h1>Cargando...</h1>
+      <div class='sk-circle'>
+        <div class='sk-circle1 sk-child' />
+        <div class='sk-circle2 sk-child' />
+        <div class='sk-circle3 sk-child' />
+        <div class='sk-circle4 sk-child' />
+        <div class='sk-circle5 sk-child' />
+        <div class='sk-circle6 sk-child' />
+        <div class='sk-circle7 sk-child' />
+        <div class='sk-circle8 sk-child' />
+        <div class='sk-circle9 sk-child' />
+        <div class='sk-circle10 sk-child' />
+        <div class='sk-circle11 sk-child' />
+        <div class='sk-circle12 sk-child' />
+      </div>
     </div>)
     : (
-      <main>
+      <Fragment>
         <header className='header'>
           <h2 className='header__title'>Teoría de la información</h2>
           <div className='group'>
@@ -38,7 +54,7 @@ export default class App extends Component {
           </div>
         </header>
         <Teoria />
-      </main>
+      </Fragment>
     )
   }
 }
